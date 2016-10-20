@@ -1,0 +1,48 @@
+.counterContainer {
+  height: 100%;
+}
+
+.backButton {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 5;
+}
+
+.counterWrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter {
+  max-height: 10rem;
+  padding: 1.5rem;
+  font-size: 5rem;
+  font-weight: bold;
+  letter-spacing: -.025em;
+}
+
+.btnGroup {
+  margin: 0;
+}
+
+.btn {
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  margin: 10px;
+  width: 4rem;
+  height: 4rem;
+  opacity: .7;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
