@@ -8,13 +8,13 @@
   <body>
     <div id="app" style="height: 100%;"></div>
 
+    <!-- Static bundle from running `webpack`. Doesn't change after bundling. -->
+    <script src="../build/app.bundle.js"></script>
+
     <!-- "Live" bundle that's served from webpack-dev-server. `npm run watch` should be running as an external process -->
     <script src="http://localhost:8080/build/app.bundle.js"></script>
 
     <!-- A static script from webpack-dev-server that allows for hot reloading of the above bundle -->
     <script src="http://localhost:8080/webpack-dev-server.js"></script>
-
-    <!-- Static bundle from running `webpack`. Doesn't change after bundling. -->
-    <!--script src="../build/app.bundle.js"></script-->
   </body>
 </html>
