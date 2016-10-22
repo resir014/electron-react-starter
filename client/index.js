@@ -1,21 +1,53 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, hashHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { routerMiddleware, push, syncHistoryWithStore } from 'react-router-redux'
+import thunk from 'redux-thunk'
+import createLogger from 'redux-logger'
+
+import actionCreators from './store/actions'
+import rootReducer from './store/reducers'
 import routes from './routes'
-import configureStore from './store/configureStore'
 
 // Font Awesome
 require('font-awesome-webpack2')
 
 // Styles
-import './app.global.scss'
+import './index.scss'
+
+// The application mount point
+const mount = document.getElementById('app')
+
+// The router middleware
+const router = routerMiddleware(hashHistory)
 
 const store = configureStore()
 const history = syncHistoryWithStore(hashHistory, store)
 
-const mount = document.getElementById('app')
+function configureStore (initialState) {
+  if (process.env.NODE_ENV === 'production') {
+    // Attach the logger into the devtools
+    const enhancer = compose(
+      applyMiddleware(thunk, router, logger),
+      window.devToolsExtension
+        ? window.devToolsExtension({ actionCreators })
+        : (noop) => { return noop }
+    )
+
+    const store = createStore(rootReducer, initialState, enhancer)
+
+    if (window.devToolsExtension) {
+      window.devToolsExtension.updateStore(store)
+    }
+
+    return store
+  } else {
+    const enhancer = applyMiddleware(thunk, router)
+    return createStore(rootReducer, initialState, enhancer)
+  }
+}
 
 render(
   <Provider store={store}>
