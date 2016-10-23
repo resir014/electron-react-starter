@@ -23,11 +23,20 @@ const mount = document.getElementById('app')
 // The router middleware
 const router = routerMiddleware(hashHistory)
 
+// Logger (for development)
+const logger = createLogger({
+  level: 'info',
+  collapsed: true
+});
+
 const store = configureStore()
 const history = syncHistoryWithStore(hashHistory, store)
 
 function configureStore (initialState) {
   if (process.env.NODE_ENV === 'production') {
+    const enhancer = applyMiddleware(thunk, router)
+    return createStore(rootReducer, initialState, enhancer)
+  } else {
     // Attach the logger into the devtools
     const enhancer = compose(
       applyMiddleware(thunk, router, logger),
@@ -43,9 +52,6 @@ function configureStore (initialState) {
     }
 
     return store
-  } else {
-    const enhancer = applyMiddleware(thunk, router)
-    return createStore(rootReducer, initialState, enhancer)
   }
 }
 
