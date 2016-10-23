@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, hashHistory } from 'react-router'
-import { routerMiddleware, push, syncHistoryWithStore } from 'react-router-redux'
+import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
@@ -27,7 +27,7 @@ const router = routerMiddleware(hashHistory)
 const logger = createLogger({
   level: 'info',
   collapsed: true
-});
+})
 
 const store = configureStore()
 const history = syncHistoryWithStore(hashHistory, store)
