@@ -8,11 +8,11 @@ What's currently working:
 
 * Webpack bundling (with hot reloading)
 * Building & running Electron app
+* Packaging (for Windows)
 
 Work in progress:
 
 * Better sample code (current one is stolen from [this repo](https://github.com/chentsulin/electron-react-boilerplate))
-* Packaging
 * More, hopefully.
 
 ---
